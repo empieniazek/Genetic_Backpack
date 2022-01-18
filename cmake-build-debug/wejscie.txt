@@ -1,0 +1,9 @@
+telewizor 10.0 3300
+kubek 0.5 20
+laptop 2.2 4000
+monitor 4.5 1500
+tablet 0.5 900
+pralka 35.0 2200
+arbuz e lol
+aparat 1.2 3500
+czajnik 1.5 130

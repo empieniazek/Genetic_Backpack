@@ -1,0 +1,1020 @@
+generacja 0, waga 248, wartosc 686:
+		144 20 71
+		538 4 16
+		704 10 68
+		533 86 64
+		21 3 30
+		409 27 74
+		0 16 89
+		497 44 57
+		901 9 59
+		227 18 96
+		280 11 62
+generacja 1, waga 478, wartosc 774:
+		527 45 73
+		234 34 84
+		466 69 24
+		562 43 78
+		864 16 80
+		636 13 16
+		499 37 97
+		556 55 69
+		327 53 84
+		313 4 5
+		902 25 77
+		903 84 87
+generacja 2, waga 615, wartosc 963:
+		552 53 48
+		996 53 18
+		526 2 62
+		553 4 74
+		637 2 71
+		113 36 70
+		852 25 35
+		325 53 20
+		412 55 52
+		40 49 72
+		307 2 62
+		905 34 46
+		806 97 45
+		936 14 27
+		285 65 82
+		467 37 49
+		604 14 52
+		635 17 22
+		897 3 56
+generacja 3, waga 777, wartosc 1117:
+		241 71 58
+		499 37 97
+		229 83 39
+		418 3 98
+		53 14 96
+		391 92 69
+		942 59 36
+		704 10 68
+		497 44 57
+		901 9 59
+		227 18 96
+		685 62 53
+		125 24 11
+		755 17 24
+		420 41 89
+		709 93 66
+		5 41 89
+		345 19 4
+		171 40 8
+generacja 4, waga 655, wartosc 997:
+		83 3 1
+		983 28 62
+		539 99 100
+		812 94 58
+		309 5 15
+		908 26 16
+		599 47 87
+		363 28 34
+		117 31 85
+		665 57 79
+		49 30 100
+		173 29 72
+		497 44 57
+		144 20 71
+		958 20 61
+		265 94 99
+generacja 5, waga 760, wartosc 1234:
+		68 40 85
+		425 53 32
+		336 75 96
+		636 13 16
+		499 37 97
+		556 55 69
+		292 70 85
+		460 68 89
+		968 11 94
+		36 54 92
+		786 50 15
+		130 17 11
+		850 15 65
+		124 73 91
+		181 56 90
+		249 35 36
+		370 14 74
+		835 24 97
+generacja 6, waga 433, wartosc 1111:
+		849 24 83
+		379 9 67
+		553 4 74
+		227 18 96
+		779 90 95
+		35 28 89
+		636 13 16
+		329 27 66
+		197 69 100
+		530 29 93
+		249 35 36
+		401 1 100
+		707 52 94
+		714 5 98
+		225 29 4
+generacja 7, waga 438, wartosc 1072:
+		800 8 89
+		528 17 94
+		648 47 29
+		637 2 71
+		3 28 97
+		332 59 100
+		630 10 34
+		142 42 79
+		313 4 5
+		753 6 37
+		781 2 64
+		779 90 95
+		189 22 98
+		762 30 79
+		610 38 59
+		817 33 42
+generacja 8, waga 278, wartosc 1142:
+		911 6 64
+		906 5 86
+		280 11 62
+		607 3 19
+		330 75 81
+		553 4 74
+		521 38 88
+		395 15 100
+		850 15 65
+		714 5 98
+		676 2 15
+		599 47 87
+		548 16 87
+		804 19 72
+		626 3 48
+		53 14 96
+generacja 9, waga 187, wartosc 1052:
+		911 6 64
+		528 17 94
+		378 1 51
+		800 8 89
+		723 4 91
+		198 23 84
+		394 5 43
+		53 14 96
+		746 5 87
+		243 21 63
+		983 28 62
+		29 23 72
+		850 15 65
+		549 17 91
+generacja 10, waga 170, wartosc 958:
+		243 21 63
+		911 6 64
+		378 1 51
+		800 8 89
+		723 4 91
+		198 23 84
+		394 5 43
+		53 14 96
+		746 5 87
+		983 28 62
+		29 23 72
+		850 15 65
+		549 17 91
+generacja 11, waga 113, wartosc 826:
+		378 1 51
+		223 1 17
+		714 5 98
+		194 22 74
+		395 15 100
+		418 3 98
+		926 15 72
+		553 4 74
+		173 29 72
+		528 17 94
+		31 1 76
+generacja 12, waga 60, wartosc 714:
+		800 8 89
+		349 4 55
+		676 2 15
+		378 1 51
+		165 16 85
+		723 4 91
+		284 2 87
+		715 7 80
+		53 14 96
+		486 2 65
+generacja 13, waga 59, wartosc 636:
+		526 2 62
+		395 15 100
+		548 16 87
+		418 3 98
+		378 1 51
+		165 16 85
+		723 4 91
+		307 2 62
+generacja 14, waga 28, wartosc 576:
+		378 1 51
+		31 1 76
+		284 2 87
+		800 8 89
+		906 5 86
+		631 4 64
+		714 5 98
+		784 2 25
+generacja 15, waga 35, wartosc 548:
+		723 4 91
+		714 5 98
+		307 2 62
+		284 2 87
+		637 2 71
+		549 17 91
+		626 3 48
+generacja 16, waga 7, wartosc 385:
+		378 1 51
+		284 2 87
+		401 1 100
+		637 2 71
+		31 1 76
+generacja 17, waga 7, wartosc 361:
+		401 1 100
+		418 3 98
+		31 1 76
+		284 2 87
+generacja 18, waga 7, wartosc 349:
+		974 2 60
+		378 1 51
+		401 1 100
+		31 1 76
+		526 2 62
+generacja 19, waga 6, wartosc 311:
+		31 1 76
+		731 2 97
+		284 2 87
+		378 1 51
+generacja 20, waga 4, wartosc 273:
+		31 1 76
+		731 2 97
+		401 1 100
+generacja 21, waga 4, wartosc 273:
+		731 2 97
+		401 1 100
+		31 1 76
+generacja 22, waga 2, wartosc 176:
+		31 1 76
+		401 1 100
+generacja 23, waga 2, wartosc 176:
+		401 1 100
+		31 1 76
+generacja 24, waga 2, wartosc 176:
+		401 1 100
+		31 1 76
+generacja 25, waga 1, wartosc 100:
+		401 1 100
+generacja 26, waga 1, wartosc 100:
+		401 1 100
+generacja 27, waga 1, wartosc 100:
+		401 1 100
+generacja 28, waga 1, wartosc 100:
+		401 1 100
+generacja 29, waga 1, wartosc 100:
+		401 1 100
+generacja 30, waga 1, wartosc 100:
+		401 1 100
+generacja 31, waga 1, wartosc 100:
+		401 1 100
+generacja 32, waga 1, wartosc 100:
+		401 1 100
+generacja 33, waga 1, wartosc 100:
+		401 1 100
+generacja 34, waga 1, wartosc 100:
+		401 1 100
+generacja 35, waga 1, wartosc 100:
+		401 1 100
+generacja 36, waga 1, wartosc 100:
+		401 1 100
+generacja 37, waga 1, wartosc 100:
+		401 1 100
+generacja 38, waga 1, wartosc 100:
+		401 1 100
+generacja 39, waga 1, wartosc 100:
+		401 1 100
+generacja 40, waga 1, wartosc 100:
+		401 1 100
+generacja 41, waga 1, wartosc 100:
+		401 1 100
+generacja 42, waga 1, wartosc 100:
+		401 1 100
+generacja 43, waga 1, wartosc 100:
+		401 1 100
+generacja 44, waga 1, wartosc 100:
+		401 1 100
+generacja 45, waga 1, wartosc 100:
+		401 1 100
+generacja 46, waga 1, wartosc 100:
+		401 1 100
+generacja 47, waga 1, wartosc 100:
+		401 1 100
+generacja 48, waga 1, wartosc 100:
+		401 1 100
+generacja 49, waga 1, wartosc 100:
+		401 1 100
+generacja 50, waga 1, wartosc 100:
+		401 1 100
+generacja 51, waga 1, wartosc 100:
+		401 1 100
+generacja 52, waga 1, wartosc 100:
+		401 1 100
+generacja 53, waga 1, wartosc 100:
+		401 1 100
+generacja 54, waga 1, wartosc 100:
+		401 1 100
+generacja 55, waga 1, wartosc 100:
+		401 1 100
+generacja 56, waga 1, wartosc 100:
+		401 1 100
+generacja 57, waga 1, wartosc 100:
+		401 1 100
+generacja 58, waga 1, wartosc 100:
+		401 1 100
+generacja 59, waga 1, wartosc 100:
+		401 1 100
+generacja 60, waga 1, wartosc 100:
+		401 1 100
+generacja 61, waga 1, wartosc 100:
+		401 1 100
+generacja 62, waga 1, wartosc 100:
+		401 1 100
+generacja 63, waga 1, wartosc 100:
+		401 1 100
+generacja 64, waga 1, wartosc 100:
+		401 1 100
+generacja 65, waga 1, wartosc 100:
+		401 1 100
+generacja 66, waga 1, wartosc 100:
+		401 1 100
+generacja 67, waga 1, wartosc 100:
+		401 1 100
+generacja 68, waga 1, wartosc 100:
+		401 1 100
+generacja 69, waga 1, wartosc 100:
+		401 1 100
+generacja 70, waga 1, wartosc 100:
+		401 1 100
+generacja 71, waga 1, wartosc 100:
+		401 1 100
+generacja 72, waga 1, wartosc 100:
+		401 1 100
+generacja 73, waga 1, wartosc 100:
+		401 1 100
+generacja 74, waga 1, wartosc 100:
+		401 1 100
+generacja 75, waga 1, wartosc 100:
+		401 1 100
+generacja 76, waga 1, wartosc 100:
+		401 1 100
+generacja 77, waga 1, wartosc 100:
+		401 1 100
+generacja 78, waga 1, wartosc 100:
+		401 1 100
+generacja 79, waga 1, wartosc 100:
+		401 1 100
+generacja 80, waga 1, wartosc 100:
+		401 1 100
+generacja 81, waga 1, wartosc 100:
+		401 1 100
+generacja 82, waga 1, wartosc 100:
+		401 1 100
+generacja 83, waga 1, wartosc 100:
+		401 1 100
+generacja 84, waga 1, wartosc 100:
+		401 1 100
+generacja 85, waga 1, wartosc 100:
+		401 1 100
+generacja 86, waga 1, wartosc 100:
+		401 1 100
+generacja 87, waga 1, wartosc 100:
+		401 1 100
+generacja 88, waga 1, wartosc 100:
+		401 1 100
+generacja 89, waga 1, wartosc 100:
+		401 1 100
+generacja 90, waga 1, wartosc 100:
+		401 1 100
+generacja 91, waga 1, wartosc 100:
+		401 1 100
+generacja 92, waga 1, wartosc 100:
+		401 1 100
+generacja 93, waga 1, wartosc 100:
+		401 1 100
+generacja 94, waga 1, wartosc 100:
+		401 1 100
+generacja 95, waga 1, wartosc 100:
+		401 1 100
+generacja 96, waga 1, wartosc 100:
+		401 1 100
+generacja 97, waga 1, wartosc 100:
+		401 1 100
+generacja 98, waga 1, wartosc 100:
+		401 1 100
+generacja 99, waga 1, wartosc 100:
+		401 1 100
+generacja 100, waga 1, wartosc 100:
+		401 1 100
+generacja 101, waga 1, wartosc 100:
+		401 1 100
+generacja 102, waga 1, wartosc 100:
+		401 1 100
+generacja 103, waga 1, wartosc 100:
+		401 1 100
+generacja 104, waga 1, wartosc 100:
+		401 1 100
+generacja 105, waga 1, wartosc 100:
+		401 1 100
+generacja 106, waga 1, wartosc 100:
+		401 1 100
+generacja 107, waga 1, wartosc 100:
+		401 1 100
+generacja 108, waga 1, wartosc 100:
+		401 1 100
+generacja 109, waga 1, wartosc 100:
+		401 1 100
+generacja 110, waga 1, wartosc 100:
+		401 1 100
+generacja 111, waga 1, wartosc 100:
+		401 1 100
+generacja 112, waga 1, wartosc 100:
+		401 1 100
+generacja 113, waga 1, wartosc 100:
+		401 1 100
+generacja 114, waga 1, wartosc 100:
+		401 1 100
+generacja 115, waga 1, wartosc 100:
+		401 1 100
+generacja 116, waga 1, wartosc 100:
+		401 1 100
+generacja 117, waga 1, wartosc 100:
+		401 1 100
+generacja 118, waga 1, wartosc 100:
+		401 1 100
+generacja 119, waga 1, wartosc 100:
+		401 1 100
+generacja 120, waga 1, wartosc 100:
+		401 1 100
+generacja 121, waga 1, wartosc 100:
+		401 1 100
+generacja 122, waga 1, wartosc 100:
+		401 1 100
+generacja 123, waga 1, wartosc 100:
+		401 1 100
+generacja 124, waga 1, wartosc 100:
+		401 1 100
+generacja 125, waga 1, wartosc 100:
+		401 1 100
+generacja 126, waga 1, wartosc 100:
+		401 1 100
+generacja 127, waga 1, wartosc 100:
+		401 1 100
+generacja 128, waga 1, wartosc 100:
+		401 1 100
+generacja 129, waga 1, wartosc 100:
+		401 1 100
+generacja 130, waga 1, wartosc 100:
+		401 1 100
+generacja 131, waga 1, wartosc 100:
+		401 1 100
+generacja 132, waga 1, wartosc 100:
+		401 1 100
+generacja 133, waga 1, wartosc 100:
+		401 1 100
+generacja 134, waga 1, wartosc 100:
+		401 1 100
+generacja 135, waga 1, wartosc 100:
+		401 1 100
+generacja 136, waga 1, wartosc 100:
+		401 1 100
+generacja 137, waga 1, wartosc 100:
+		401 1 100
+generacja 138, waga 1, wartosc 100:
+		401 1 100
+generacja 139, waga 1, wartosc 100:
+		401 1 100
+generacja 140, waga 1, wartosc 100:
+		401 1 100
+generacja 141, waga 1, wartosc 100:
+		401 1 100
+generacja 142, waga 1, wartosc 100:
+		401 1 100
+generacja 143, waga 1, wartosc 100:
+		401 1 100
+generacja 144, waga 1, wartosc 100:
+		401 1 100
+generacja 145, waga 1, wartosc 100:
+		401 1 100
+generacja 146, waga 1, wartosc 100:
+		401 1 100
+generacja 147, waga 1, wartosc 100:
+		401 1 100
+generacja 148, waga 1, wartosc 100:
+		401 1 100
+generacja 149, waga 1, wartosc 100:
+		401 1 100
+generacja 150, waga 1, wartosc 100:
+		401 1 100
+generacja 151, waga 1, wartosc 100:
+		401 1 100
+generacja 152, waga 1, wartosc 100:
+		401 1 100
+generacja 153, waga 1, wartosc 100:
+		401 1 100
+generacja 154, waga 1, wartosc 100:
+		401 1 100
+generacja 155, waga 1, wartosc 100:
+		401 1 100
+generacja 156, waga 1, wartosc 100:
+		401 1 100
+generacja 157, waga 1, wartosc 100:
+		401 1 100
+generacja 158, waga 1, wartosc 100:
+		401 1 100
+generacja 159, waga 1, wartosc 100:
+		401 1 100
+generacja 160, waga 1, wartosc 100:
+		401 1 100
+generacja 161, waga 1, wartosc 100:
+		401 1 100
+generacja 162, waga 1, wartosc 100:
+		401 1 100
+generacja 163, waga 1, wartosc 100:
+		401 1 100
+generacja 164, waga 1, wartosc 100:
+		401 1 100
+generacja 165, waga 1, wartosc 100:
+		401 1 100
+generacja 166, waga 1, wartosc 100:
+		401 1 100
+generacja 167, waga 1, wartosc 100:
+		401 1 100
+generacja 168, waga 1, wartosc 100:
+		401 1 100
+generacja 169, waga 1, wartosc 100:
+		401 1 100
+generacja 170, waga 1, wartosc 100:
+		401 1 100
+generacja 171, waga 1, wartosc 100:
+		401 1 100
+generacja 172, waga 1, wartosc 100:
+		401 1 100
+generacja 173, waga 1, wartosc 100:
+		401 1 100
+generacja 174, waga 1, wartosc 100:
+		401 1 100
+generacja 175, waga 1, wartosc 100:
+		401 1 100
+generacja 176, waga 1, wartosc 100:
+		401 1 100
+generacja 177, waga 1, wartosc 100:
+		401 1 100
+generacja 178, waga 1, wartosc 100:
+		401 1 100
+generacja 179, waga 1, wartosc 100:
+		401 1 100
+generacja 180, waga 1, wartosc 100:
+		401 1 100
+generacja 181, waga 1, wartosc 100:
+		401 1 100
+generacja 182, waga 1, wartosc 100:
+		401 1 100
+generacja 183, waga 1, wartosc 100:
+		401 1 100
+generacja 184, waga 1, wartosc 100:
+		401 1 100
+generacja 185, waga 1, wartosc 100:
+		401 1 100
+generacja 186, waga 1, wartosc 100:
+		401 1 100
+generacja 187, waga 1, wartosc 100:
+		401 1 100
+generacja 188, waga 1, wartosc 100:
+		401 1 100
+generacja 189, waga 1, wartosc 100:
+		401 1 100
+generacja 190, waga 1, wartosc 100:
+		401 1 100
+generacja 191, waga 1, wartosc 100:
+		401 1 100
+generacja 192, waga 1, wartosc 100:
+		401 1 100
+generacja 193, waga 1, wartosc 100:
+		401 1 100
+generacja 194, waga 1, wartosc 100:
+		401 1 100
+generacja 195, waga 1, wartosc 100:
+		401 1 100
+generacja 196, waga 1, wartosc 100:
+		401 1 100
+generacja 197, waga 1, wartosc 100:
+		401 1 100
+generacja 198, waga 1, wartosc 100:
+		401 1 100
+generacja 199, waga 1, wartosc 100:
+		401 1 100
+generacja 200, waga 1, wartosc 100:
+		401 1 100
+generacja 201, waga 1, wartosc 100:
+		401 1 100
+generacja 202, waga 1, wartosc 100:
+		401 1 100
+generacja 203, waga 1, wartosc 100:
+		401 1 100
+generacja 204, waga 1, wartosc 100:
+		401 1 100
+generacja 205, waga 1, wartosc 100:
+		401 1 100
+generacja 206, waga 1, wartosc 100:
+		401 1 100
+generacja 207, waga 1, wartosc 100:
+		401 1 100
+generacja 208, waga 1, wartosc 100:
+		401 1 100
+generacja 209, waga 1, wartosc 100:
+		401 1 100
+generacja 210, waga 1, wartosc 100:
+		401 1 100
+generacja 211, waga 1, wartosc 100:
+		401 1 100
+generacja 212, waga 1, wartosc 100:
+		401 1 100
+generacja 213, waga 1, wartosc 100:
+		401 1 100
+generacja 214, waga 1, wartosc 100:
+		401 1 100
+generacja 215, waga 1, wartosc 100:
+		401 1 100
+generacja 216, waga 1, wartosc 100:
+		401 1 100
+generacja 217, waga 1, wartosc 100:
+		401 1 100
+generacja 218, waga 1, wartosc 100:
+		401 1 100
+generacja 219, waga 1, wartosc 100:
+		401 1 100
+generacja 220, waga 1, wartosc 100:
+		401 1 100
+generacja 221, waga 1, wartosc 100:
+		401 1 100
+generacja 222, waga 1, wartosc 100:
+		401 1 100
+generacja 223, waga 1, wartosc 100:
+		401 1 100
+generacja 224, waga 1, wartosc 100:
+		401 1 100
+generacja 225, waga 1, wartosc 100:
+		401 1 100
+generacja 226, waga 1, wartosc 100:
+		401 1 100
+generacja 227, waga 1, wartosc 100:
+		401 1 100
+generacja 228, waga 1, wartosc 100:
+		401 1 100
+generacja 229, waga 1, wartosc 100:
+		401 1 100
+generacja 230, waga 1, wartosc 100:
+		401 1 100
+generacja 231, waga 1, wartosc 100:
+		401 1 100
+generacja 232, waga 1, wartosc 100:
+		401 1 100
+generacja 233, waga 1, wartosc 100:
+		401 1 100
+generacja 234, waga 1, wartosc 100:
+		401 1 100
+generacja 235, waga 1, wartosc 100:
+		401 1 100
+generacja 236, waga 1, wartosc 100:
+		401 1 100
+generacja 237, waga 1, wartosc 100:
+		401 1 100
+generacja 238, waga 1, wartosc 100:
+		401 1 100
+generacja 239, waga 1, wartosc 100:
+		401 1 100
+generacja 240, waga 1, wartosc 100:
+		401 1 100
+generacja 241, waga 1, wartosc 100:
+		401 1 100
+generacja 242, waga 1, wartosc 100:
+		401 1 100
+generacja 243, waga 1, wartosc 100:
+		401 1 100
+generacja 244, waga 1, wartosc 100:
+		401 1 100
+generacja 245, waga 1, wartosc 100:
+		401 1 100
+generacja 246, waga 1, wartosc 100:
+		401 1 100
+generacja 247, waga 1, wartosc 100:
+		401 1 100
+generacja 248, waga 1, wartosc 100:
+		401 1 100
+generacja 249, waga 1, wartosc 100:
+		401 1 100
+generacja 250, waga 1, wartosc 100:
+		401 1 100
+generacja 251, waga 1, wartosc 100:
+		401 1 100
+generacja 252, waga 1, wartosc 100:
+		401 1 100
+generacja 253, waga 1, wartosc 100:
+		401 1 100
+generacja 254, waga 1, wartosc 100:
+		401 1 100
+generacja 255, waga 1, wartosc 100:
+		401 1 100
+generacja 256, waga 1, wartosc 100:
+		401 1 100
+generacja 257, waga 1, wartosc 100:
+		401 1 100
+generacja 258, waga 1, wartosc 100:
+		401 1 100
+generacja 259, waga 1, wartosc 100:
+		401 1 100
+generacja 260, waga 1, wartosc 100:
+		401 1 100
+generacja 261, waga 1, wartosc 100:
+		401 1 100
+generacja 262, waga 1, wartosc 100:
+		401 1 100
+generacja 263, waga 1, wartosc 100:
+		401 1 100
+generacja 264, waga 1, wartosc 100:
+		401 1 100
+generacja 265, waga 1, wartosc 100:
+		401 1 100
+generacja 266, waga 1, wartosc 100:
+		401 1 100
+generacja 267, waga 1, wartosc 100:
+		401 1 100
+generacja 268, waga 1, wartosc 100:
+		401 1 100
+generacja 269, waga 1, wartosc 100:
+		401 1 100
+generacja 270, waga 1, wartosc 100:
+		401 1 100
+generacja 271, waga 1, wartosc 100:
+		401 1 100
+generacja 272, waga 1, wartosc 100:
+		401 1 100
+generacja 273, waga 1, wartosc 100:
+		401 1 100
+generacja 274, waga 1, wartosc 100:
+		401 1 100
+generacja 275, waga 1, wartosc 100:
+		401 1 100
+generacja 276, waga 1, wartosc 100:
+		401 1 100
+generacja 277, waga 1, wartosc 100:
+		401 1 100
+generacja 278, waga 1, wartosc 100:
+		401 1 100
+generacja 279, waga 1, wartosc 100:
+		401 1 100
+generacja 280, waga 1, wartosc 100:
+		401 1 100
+generacja 281, waga 1, wartosc 100:
+		401 1 100
+generacja 282, waga 1, wartosc 100:
+		401 1 100
+generacja 283, waga 1, wartosc 100:
+		401 1 100
+generacja 284, waga 1, wartosc 100:
+		401 1 100
+generacja 285, waga 1, wartosc 100:
+		401 1 100
+generacja 286, waga 1, wartosc 100:
+		401 1 100
+generacja 287, waga 1, wartosc 100:
+		401 1 100
+generacja 288, waga 1, wartosc 100:
+		401 1 100
+generacja 289, waga 1, wartosc 100:
+		401 1 100
+generacja 290, waga 1, wartosc 100:
+		401 1 100
+generacja 291, waga 1, wartosc 100:
+		401 1 100
+generacja 292, waga 1, wartosc 100:
+		401 1 100
+generacja 293, waga 1, wartosc 100:
+		401 1 100
+generacja 294, waga 1, wartosc 100:
+		401 1 100
+generacja 295, waga 1, wartosc 100:
+		401 1 100
+generacja 296, waga 1, wartosc 100:
+		401 1 100
+generacja 297, waga 1, wartosc 100:
+		401 1 100
+generacja 298, waga 1, wartosc 100:
+		401 1 100
+generacja 299, waga 1, wartosc 100:
+		401 1 100
+generacja 300, waga 1, wartosc 100:
+		401 1 100
+generacja 301, waga 1, wartosc 100:
+		401 1 100
+generacja 302, waga 1, wartosc 100:
+		401 1 100
+generacja 303, waga 1, wartosc 100:
+		401 1 100
+generacja 304, waga 1, wartosc 100:
+		401 1 100
+generacja 305, waga 1, wartosc 100:
+		401 1 100
+generacja 306, waga 1, wartosc 100:
+		401 1 100
+generacja 307, waga 1, wartosc 100:
+		401 1 100
+generacja 308, waga 1, wartosc 100:
+		401 1 100
+generacja 309, waga 1, wartosc 100:
+		401 1 100
+generacja 310, waga 1, wartosc 100:
+		401 1 100
+generacja 311, waga 1, wartosc 100:
+		401 1 100
+generacja 312, waga 1, wartosc 100:
+		401 1 100
+generacja 313, waga 1, wartosc 100:
+		401 1 100
+generacja 314, waga 1, wartosc 100:
+		401 1 100
+generacja 315, waga 1, wartosc 100:
+		401 1 100
+generacja 316, waga 1, wartosc 100:
+		401 1 100
+generacja 317, waga 1, wartosc 100:
+		401 1 100
+generacja 318, waga 1, wartosc 100:
+		401 1 100
+generacja 319, waga 1, wartosc 100:
+		401 1 100
+generacja 320, waga 1, wartosc 100:
+		401 1 100
+generacja 321, waga 1, wartosc 100:
+		401 1 100
+generacja 322, waga 1, wartosc 100:
+		401 1 100
+generacja 323, waga 1, wartosc 100:
+		401 1 100
+generacja 324, waga 1, wartosc 100:
+		401 1 100
+generacja 325, waga 1, wartosc 100:
+		401 1 100
+generacja 326, waga 1, wartosc 100:
+		401 1 100
+generacja 327, waga 1, wartosc 100:
+		401 1 100
+generacja 328, waga 1, wartosc 100:
+		401 1 100
+generacja 329, waga 1, wartosc 100:
+		401 1 100
+generacja 330, waga 1, wartosc 100:
+		401 1 100
+generacja 331, waga 1, wartosc 100:
+		401 1 100
+generacja 332, waga 1, wartosc 100:
+		401 1 100
+generacja 333, waga 1, wartosc 100:
+		401 1 100
+generacja 334, waga 1, wartosc 100:
+		401 1 100
+generacja 335, waga 1, wartosc 100:
+		401 1 100
+generacja 336, waga 1, wartosc 100:
+		401 1 100
+generacja 337, waga 1, wartosc 100:
+		401 1 100
+generacja 338, waga 1, wartosc 100:
+		401 1 100
+generacja 339, waga 1, wartosc 100:
+		401 1 100
+generacja 340, waga 1, wartosc 100:
+		401 1 100
+generacja 341, waga 1, wartosc 100:
+		401 1 100
+generacja 342, waga 1, wartosc 100:
+		401 1 100
+generacja 343, waga 1, wartosc 100:
+		401 1 100
+generacja 344, waga 1, wartosc 100:
+		401 1 100
+generacja 345, waga 1, wartosc 100:
+		401 1 100
+generacja 346, waga 1, wartosc 100:
+		401 1 100
+generacja 347, waga 1, wartosc 100:
+		401 1 100
+generacja 348, waga 1, wartosc 100:
+		401 1 100
+generacja 349, waga 1, wartosc 100:
+		401 1 100
+generacja 350, waga 1, wartosc 100:
+		401 1 100
+generacja 351, waga 1, wartosc 100:
+		401 1 100
+generacja 352, waga 1, wartosc 100:
+		401 1 100
+generacja 353, waga 1, wartosc 100:
+		401 1 100
+generacja 354, waga 1, wartosc 100:
+		401 1 100
+generacja 355, waga 1, wartosc 100:
+		401 1 100
+generacja 356, waga 1, wartosc 100:
+		401 1 100
+generacja 357, waga 1, wartosc 100:
+		401 1 100
+generacja 358, waga 1, wartosc 100:
+		401 1 100
+generacja 359, waga 1, wartosc 100:
+		401 1 100
+generacja 360, waga 1, wartosc 100:
+		401 1 100
+generacja 361, waga 1, wartosc 100:
+		401 1 100
+generacja 362, waga 1, wartosc 100:
+		401 1 100
+generacja 363, waga 1, wartosc 100:
+		401 1 100
+generacja 364, waga 1, wartosc 100:
+		401 1 100
+generacja 365, waga 1, wartosc 100:
+		401 1 100
+generacja 366, waga 1, wartosc 100:
+		401 1 100
+generacja 367, waga 1, wartosc 100:
+		401 1 100
+generacja 368, waga 1, wartosc 100:
+		401 1 100
+generacja 369, waga 1, wartosc 100:
+		401 1 100
+generacja 370, waga 1, wartosc 100:
+		401 1 100
+generacja 371, waga 1, wartosc 100:
+		401 1 100
+generacja 372, waga 1, wartosc 100:
+		401 1 100
+generacja 373, waga 1, wartosc 100:
+		401 1 100
+generacja 374, waga 1, wartosc 100:
+		401 1 100
+generacja 375, waga 1, wartosc 100:
+		401 1 100
+generacja 376, waga 1, wartosc 100:
+		401 1 100
+generacja 377, waga 1, wartosc 100:
+		401 1 100
+generacja 378, waga 1, wartosc 100:
+		401 1 100
+generacja 379, waga 1, wartosc 100:
+		401 1 100
+generacja 380, waga 1, wartosc 100:
+		401 1 100
+generacja 381, waga 1, wartosc 100:
+		401 1 100
+generacja 382, waga 1, wartosc 100:
+		401 1 100
+generacja 383, waga 1, wartosc 100:
+		401 1 100
+generacja 384, waga 1, wartosc 100:
+		401 1 100
+generacja 385, waga 1, wartosc 100:
+		401 1 100
+generacja 386, waga 1, wartosc 100:
+		401 1 100
+generacja 387, waga 1, wartosc 100:
+		401 1 100
+generacja 388, waga 1, wartosc 100:
+		401 1 100
+generacja 389, waga 1, wartosc 100:
+		401 1 100
+generacja 390, waga 1, wartosc 100:
+		401 1 100
+generacja 391, waga 1, wartosc 100:
+		401 1 100
+generacja 392, waga 1, wartosc 100:
+		401 1 100
+generacja 393, waga 1, wartosc 100:
+		401 1 100
+generacja 394, waga 1, wartosc 100:
+		401 1 100
+generacja 395, waga 1, wartosc 100:
+		401 1 100
+generacja 396, waga 1, wartosc 100:
+		401 1 100
+generacja 397, waga 1, wartosc 100:
+		401 1 100
+generacja 398, waga 1, wartosc 100:
+		401 1 100
+generacja 399, waga 1, wartosc 100:
+		401 1 100
+generacja 400, waga 1, wartosc 100:
+		401 1 100
