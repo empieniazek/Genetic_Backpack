@@ -7,24 +7,6 @@
 #include <algorithm>
 #include "Deklaracje.h"
 
-/* TO CHECK:x
-
-    1. zmienic generacje plecaka na generacje populacji:
-        funkcja generacja populacji shuffleuje przedmioty i po kolei wklada je do plecaka
-        funkcja generacja plecaka po prostu wklada przedmiot do plecaka i zwraca plecak
-
-    2. Zaimplementowac algorytm krzyzowania
-        - znalezc algorytm
-
-    3. Zmienic algorytm selekcji:
-        - shuffle po potomkach - sprawdzam po dwa - jeden z nich zostaje
-
-    4. zmienic bubblesort na zwykle sortowanie
-
-    5. zaaktualizowac funkcje algorytm zeby dzialala dobrze
-
-*/
-
 // ====================== generator liczb losowych ==================
 // funkcja ktora zwraca nam losowa liczbe z podanego przedzialu
 int losowa(int minimum, int maximum) {
@@ -34,6 +16,13 @@ int losowa(int minimum, int maximum) {
     static std::default_random_engine silnik(std::chrono::system_clock::now().time_since_epoch().count());
     std::uniform_int_distribution<int> s(minimum, maximum);
     return s(silnik);
+}
+
+double ocen_plecak(const plecak& plecak, const double L_PLECAKA){
+    if(plecak.waga > L_PLECAKA){
+        return 0;
+    }
+    return (plecak.wartosc*1.5 - (L_PLECAKA - plecak.waga));
 }
 
 // ======================== tworzenie puli przedmiotow =====================
