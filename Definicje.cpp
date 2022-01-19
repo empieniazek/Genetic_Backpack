@@ -38,7 +38,7 @@ int losowa(int minimum, int maximum) {
 
 // ======================== tworzenie puli przedmiotow =====================
 // funkcja przedmioty tworzy pule przedmiotow
-std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) { //wektor z przedmiotami z pliku
+std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) {
     std::vector<przedmiot> przedmioty;
     std::ifstream plik(NAZWA_PLIKU);  /// @todo jakas zgrabniejsza nazwa strumienia
     przedmiot item;
@@ -53,12 +53,10 @@ std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) { //we
             {
                 if (item.waga > 0 && item.wartosc > 0)
                     przedmioty.push_back(item);
-            //    std::cout << item.nazwa << " " << item.wartosc << " " << item.waga << std::endl;
             }
             n.clear();  // KS: kasuje flagi bledow 
         }
     }
-   // std::cout << std::endl << std::endl;
     return przedmioty;
 }
 
@@ -107,42 +105,12 @@ std::vector < plecak > generator_populacji(int L_OSOBNIKOW, double L_PLECAKA, st
         }
 
         //5. przekazuje plecak do listy plecakow
-        plecak.ocena = plecak.wartosc/plecak.waga;
+        plecak.ocena = ocen_plecak(plecak, L_PLECAKA);
         populacja.push_back(plecak);
     }
     // 6. jezeli mam wszystkie plecaki zwracam liste - jezeli nie - wracam do punktu 2
     return populacja;
 }
-
-void drukuj_plecaki(plecak* plecak_a, plecak* plecak_b, std::string coto) {
-    int max_index = 0;
-    int min_index = 0;
-    if (plecak_a->przedmioty.size() - 1 > plecak_b->przedmioty.size() - 1) {
-        max_index = plecak_a->przedmioty.size() - 1;
-        min_index = plecak_b->przedmioty.size() - 1;
-    }
-    else {
-        max_index = plecak_b->przedmioty.size() - 1;
-        min_index = plecak_a->przedmioty.size() - 1;
-    }
-
-    // std::cout << "\n1" << coto << "\t" << plecak_a->waga << "\t" << plecak_a->wartosc << "\t2" << coto << "\t" << plecak_b->waga << "\t" << plecak_b->wartosc << std::endl;
-    for (int i = 0; i <= max_index; i++) {
-        if (plecak_a->przedmioty.size() - 1 >= i) {
-            std::cout << plecak_a->przedmioty[i].nazwa << "\t" << plecak_a->przedmioty[i].waga << "\t" << plecak_a->przedmioty[i].wartosc;
-        }
-        else {
-            std::cout << "\t\t";
-        }
-        if (plecak_b->przedmioty.size() - 1 >= i) {
-            std::cout << "\t" << plecak_b->przedmioty[i].nazwa << "\t" << plecak_b->przedmioty[i].waga << "\t" << plecak_b->przedmioty[i].wartosc << std::endl;
-        }
-        else {
-            std::cout << "\t\t\t" << std::endl;
-        }
-    }
-}
-
 
 // ======================== GENERACJA POTOMKA ============================
 // Wykorzystuje algortym Order Crossover Operator (OX).
@@ -155,26 +123,57 @@ void drukuj_plecaki(plecak* plecak_a, plecak* plecak_b, std::string coto) {
 
 // std::pair<plecak, plecak> krzyzowanie (const plecak & osobnik_a, const plecak & osobnik_b, const  double L_PLECAKA);
 
+std::pair<int, int> licz_granice_plecaka(plecak *plecak){
+    int lewa, prawa;
+    int max_index_a = plecak->przedmioty.size()-1;
+
+    lewa = losowa(0, max_index_a);
+    prawa = losowa(0, max_index_a);
+
+    if(lewa > prawa){
+        int temp = lewa;
+        lewa = prawa;
+        prawa = temp;
+    }
+
+    return std::make_pair(lewa, prawa);
+}
+
+void przygotowanie_krzyzowania(plecak *rodzic, plecak *potomek, std::vector<przedmiot> *do_przekazania){
+    std::pair<int, int> granice = licz_granice_plecaka(rodzic);
+
+    for(int i = 0; i <= rodzic->przedmioty.size()-1; i++){
+        if( granice.first <= i && i <= granice.second){
+            potomek->przedmioty.push_back( rodzic->przedmioty[i] );
+            potomek->wartosc += rodzic->przedmioty[i].wartosc;
+            potomek->waga += rodzic->przedmioty[i].waga;
+        }else{
+            do_przekazania->push_back( rodzic->przedmioty[i] );
+        }
+    }
+}
+
+void przypisanie_przedmiotow_potomkom(plecak *potomek_wlasciwy, plecak *potomek_odpad, std::vector<przedmiot> do_wpisania){
+    for(int i = 0; i < do_wpisania.size(); i++){
+        bool powtarza_sie = false;
+        for(int j = 0; j < potomek_wlasciwy->przedmioty.size(); j++){
+            if(potomek_wlasciwy->przedmioty[j].nazwa == do_wpisania[i].nazwa){
+                powtarza_sie = true;
+            }
+        }
+        if(powtarza_sie){
+            potomek_odpad->przedmioty.push_back(do_wpisania[i]);
+            potomek_odpad->wartosc += do_wpisania[i].wartosc;
+            potomek_odpad->waga += do_wpisania[i].waga;
+        }else{
+            potomek_wlasciwy->przedmioty.push_back(do_wpisania[i]);
+            potomek_wlasciwy->wartosc += do_wpisania[i].wartosc;
+            potomek_wlasciwy->waga += do_wpisania[i].waga;
+        }
+    }
+}
+
 void krzyzowanie(plecak* osobnik_a, plecak* osobnik_b, std::vector<plecak>* potomkowie, double L_PLECAKA) { //krzyzowanie osobnikow
-    int max_index_a = osobnik_a->przedmioty.size()-1;
-    int max_index_b = osobnik_b->przedmioty.size()-1;
-
-    int lewa_granica_a = losowa(0, max_index_a);
-    int prawa_granica_a = losowa(0, max_index_a);
-    if(lewa_granica_a > prawa_granica_a){
-        int temp = lewa_granica_a;
-        lewa_granica_a = prawa_granica_a;
-        prawa_granica_a = temp;
-    }
-
-    int lewa_granica_b = losowa(0, max_index_b);
-    int prawa_granica_b = losowa(0, max_index_b);
-    if(lewa_granica_b > prawa_granica_b){
-        int temp = lewa_granica_b;
-        lewa_granica_b = prawa_granica_b;
-        prawa_granica_b = temp;
-    }
-
     std::vector< przedmiot > do_wpisania_a;
     std::vector< przedmiot > do_wpisania_b;
 
@@ -187,63 +186,14 @@ void krzyzowanie(plecak* osobnik_a, plecak* osobnik_b, std::vector<plecak>* poto
     potomek_b.waga = 0;
     potomek_b.ocena = 0;
 
-    for(int i = 0; i <= max_index_a; i++){
-        if( lewa_granica_a <= i && i <= prawa_granica_a){
-            potomek_a.przedmioty.push_back( osobnik_a->przedmioty[i] );
-            potomek_a.wartosc += osobnik_a->przedmioty[i].wartosc;
-            potomek_a.waga += osobnik_a->przedmioty[i].waga;
-        }else{
-            do_wpisania_b.push_back( osobnik_a->przedmioty[i] );
-        }
-    }
-    for(int i = 0; i <= max_index_b; i++){
-        if( lewa_granica_b <= i && i <= prawa_granica_b){
-            potomek_b.przedmioty.push_back( osobnik_b->przedmioty[i] );
-            potomek_b.wartosc += osobnik_b->przedmioty[i].wartosc;
-            potomek_b.waga += osobnik_b->przedmioty[i].waga;
-        }else{
-            do_wpisania_a.push_back( osobnik_b->przedmioty[i] );
-        }
-    }
+    przygotowanie_krzyzowania(osobnik_a, &potomek_a, &do_wpisania_b);
+    przygotowanie_krzyzowania(osobnik_b, &potomek_b, &do_wpisania_a);
 
-    for(int i = 0; i < do_wpisania_a.size(); i++){
-        bool powtarza_sie = false;
-        for(int j = 0; j < potomek_a.przedmioty.size(); j++){
-            if(potomek_a.przedmioty[j].nazwa == do_wpisania_a[i].nazwa){
-                powtarza_sie = true;
-            }
-        }
-        if(powtarza_sie){
-            potomek_b.przedmioty.push_back(do_wpisania_a[i]);
-            potomek_b.wartosc += do_wpisania_a[i].wartosc;
-            potomek_b.waga += do_wpisania_a[i].waga;
-        }else{
-            potomek_a.przedmioty.push_back(do_wpisania_a[i]);
-            potomek_a.wartosc += do_wpisania_a[i].wartosc;
-            potomek_a.waga += do_wpisania_a[i].waga;
-        }
-    }
+    przypisanie_przedmiotow_potomkom(&potomek_a, &potomek_b, do_wpisania_a);
+    przypisanie_przedmiotow_potomkom(&potomek_b, &potomek_a, do_wpisania_b);
 
-    for(int i = 0; i < do_wpisania_b.size(); i++){
-        bool powtarza_sie = false;
-        for(int j = 0; j < potomek_b.przedmioty.size(); j++){
-            if(potomek_b.przedmioty[j].nazwa == do_wpisania_b[i].nazwa){
-                powtarza_sie = true;
-            }
-        }
-        if(powtarza_sie){
-            potomek_a.przedmioty.push_back(do_wpisania_b[i]);
-            potomek_a.wartosc += do_wpisania_b[i].wartosc;
-            potomek_a.waga += do_wpisania_b[i].waga;
-        }else{
-            potomek_b.przedmioty.push_back(do_wpisania_b[i]);
-            potomek_b.wartosc += do_wpisania_b[i].wartosc;
-            potomek_b.waga += do_wpisania_b[i].waga;
-        }
-    }
-
-    potomek_b.ocena = potomek_b.wartosc / potomek_b.waga;
-    potomek_a.ocena = potomek_a.wartosc / potomek_a.waga;
+    potomek_a.ocena = ocen_plecak(potomek_a, L_PLECAKA);
+    potomek_b.ocena = ocen_plecak(potomek_b, L_PLECAKA);
 
     potomkowie->push_back(potomek_b);
     potomkowie->push_back(potomek_a);
@@ -263,28 +213,15 @@ std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > populacja, int L
 
     for (int i = 0; i < populacja.size(); i++) 
     {
-        int pierwszy = losowa(0, populacja.size() - 1);
-        int drugi    = losowa(0, populacja.size() - 1);
-        
         int index = losowa(0, populacja.size() - 1);
-        while (index == i) {
-            index = losowa(0, populacja.size() - 1);
-        }
         krzyzowanie(&populacja[i], &populacja[index], &potomkowie, L_PLECAKA);
-        // ocen osobniki w krzyzowaniu
     }
     return potomkowie;
 }
 
-// ======================= SORTOWANIE POPULACJI ==========================
-// 
+// Funkcja porownojaca plecaki
 bool porownanie_plecakow(plecak plecak1, plecak plecak2) {
     return(plecak1.ocena > plecak2.ocena);
-}
-
-std::vector<plecak> sortowanie_populacji(std::vector< plecak > populacja) { //sortowanie populacji;
-    std::sort(populacja.begin(), populacja.end(), porownanie_plecakow);
-    return populacja;
 }
 
 // ======================== SELEKCJA POPULACJI =========================
@@ -315,21 +252,22 @@ std::vector<plecak> selekcja_populacji_poprawna(std::vector< plecak > populacja,
 //
 //void drukuj_plecak(std::ofstream & plik, const plecak & plecak_dobry);
 
-void drukuj_plecak(std::ofstream* plik, int numer_generacji, plecak plecak_dobry, plecak plecak_zly) {
+void drukuj_plecak(std::ofstream* plik, int numer_generacji, plecak plecak_dobry) {
     if ((*plik).is_open()) {
-        *plik << "generacja " << numer_generacji << ", waga " << plecak_dobry.waga << ", wartosc" << " " << plecak_dobry.wartosc << ":" << std::endl;
+        *plik << "generacja " << numer_generacji << ", waga " << plecak_dobry.waga << ", wartosc" << " " << plecak_dobry.wartosc << ", ocena "<< plecak_dobry.ocena << ":" << std::endl;
         for (int index = 0; index < plecak_dobry.przedmioty.size(); index++) {
             *plik << "\t\t" << plecak_dobry.przedmioty[index].nazwa << " " << plecak_dobry.przedmioty[index].waga << " " << plecak_dobry.przedmioty[index].wartosc << std::endl;
         }
     }
 }
 
+// Funkcja wybiera najlepszy element sposrod
 plecak najlepszy( std::vector<plecak> populacja ){
     plecak najlepszy;
     najlepszy.wartosc = 0;
     najlepszy.ocena = 0;
     for(int i = 0; i < populacja.size(); i++){
-        if(populacja[i].wartosc > najlepszy.wartosc){
+        if(porownanie_plecakow(populacja[i], najlepszy)){
             najlepszy = populacja[i];
         }
     }
@@ -357,12 +295,18 @@ plecak algorytm(std::vector<przedmiot> tablica, int L_OSOBNIKOW, double L_PLECAK
     int numer_populacji = 0;
 
     // zabezpieczenie przed nieskonczona petla
-    if (populacja.size() < 2) 
-        return populacja[0];  // KS: Co gdy populacja.size() == 0?
-
-    populacja = sortowanie_populacji(populacja); // KS: To nie jest dobry pomysl.
-    // wypisac numer pokolenia, a potem plecak
-    drukuj_plecak(&plik, numer_populacji, populacja[0], populacja[populacja.size() - 1]);
+    if(populacja.empty()){
+        std::cout << "\nBlad danych wejsciowych";
+        plik << "\nBlad danych wejsciowych";
+        plecak plecak;
+        return plecak;
+    }
+    else if (populacja.size() < 2) {
+        drukuj_plecak(&plik, numer_populacji, najlepszy(populacja));
+        return populacja[0];
+    }
+    std::cout << "\nlicze generacje: " << numer_populacji << " LICZB elementow: " << populacja.size() << std::endl;
+    drukuj_plecak(&plik, numer_populacji, najlepszy(populacja));
 
     struct plecak najlepsiejszy;
     najlepsiejszy.wartosc = 0;
@@ -370,31 +314,23 @@ plecak algorytm(std::vector<przedmiot> tablica, int L_OSOBNIKOW, double L_PLECAK
 
     for (int i = 0; i < L_POKOLEN; i++)
     {
-        std::cout << "\nliczee generacje: " << numer_populacji << " LICZB elementow: " << populacja.size() << std::endl;
+        std::cout << "\nlicze generacje: " << numer_populacji+1 << " LICZB elementow: " << populacja.size() << std::endl;
         std::vector<plecak> nowa_populacja;
+        plecak debesciak;
         nowa_populacja = krzyzowanie_populacji(populacja, L_PLECAKA);
         nowa_populacja = selekcja_populacji_poprawna(nowa_populacja, L_OSOBNIKOW);
-        plecak debesciak;
         debesciak = najlepszy(nowa_populacja);
         numer_populacji++;
         populacja = nowa_populacja;
-        drukuj_plecak(&plik, numer_populacji, debesciak, populacja[populacja.size() - 1]);
-        if (debesciak.wartosc > najlepsiejszy.wartosc) {
+        drukuj_plecak(&plik, numer_populacji, debesciak);
+        if (debesciak.ocena > najlepsiejszy.ocena) {
             najlepsiejszy = debesciak;
         }
     }
- //   std::cout << "\nnajlepszy plecak:\twaga - " << najlepszy.waga << "\twartosc - " << najlepszy.wartosc << std::endl;
-  //  for (int i = 0; i < najlepszy.przedmioty.size(); i++) {
-  //      std::cout << najlepszy.przedmioty[i].nazwa << "\t" << najlepszy.przedmioty[i].waga << "\t" << najlepszy.przedmioty[i].wartosc << std::endl;
-  //  }
+    std::cout << "\nnajlepszy plecak:\twaga - " << najlepsiejszy.waga << "\twartosc - " << najlepsiejszy.wartosc << std::endl;
+    for (int i = 0; i < najlepsiejszy.przedmioty.size(); i++) {
+        std::cout << najlepsiejszy.przedmioty[i].nazwa << "\t" << najlepsiejszy.przedmioty[i].waga << "\t" << najlepsiejszy.przedmioty[i].wartosc << std::endl;
+    }
     plik.close();
     return najlepsiejszy;
 }
-
-
-//5.wypisac najlepszy osobnik
-
-// Wygenerowac duza liczbe (>1000) przedmiotow (calkowicie losowo).
-
-
-
