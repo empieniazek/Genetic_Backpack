@@ -7,9 +7,10 @@
 #include <algorithm>
 #include "Deklaracje.h"
 
-/** Funkcja losujaca
- *  funkcja przyjmuje przedzial z ktorego ma wylosowac liczbe
- *  zwraca liczbe
+/** \brief Funkcja losujaca.
+ *
+ *  funkcja przyjmuje przedzial z ktorego ma wylosowac liczbe i zwrocic ta liczbe
+ *
  * @param minimum
  * @param maximum
  * @return losowa_liczba
@@ -22,8 +23,10 @@ int losowa(int minimum, int maximum) {
     std::uniform_int_distribution<int> s(minimum, maximum);
     return s(silnik);
 }
-/** Funkcja ocenia plecak
+/** \brief Funkcja ocenia plecak.
+ *
  * Funkcja ocenia plecak w zaleznosci od jego wartosci i tego jak jest wypelniony
+ *
  * @param plecak
  * @param L_PLECAKA
  * @return ocena
@@ -32,15 +35,17 @@ double ocen_plecak(const plecak& plecak, const double& L_PLECAKA){
     if(plecak.waga > L_PLECAKA){
         return 0;
     }
-    return (plecak.wartosc*1.5 - (L_PLECAKA - plecak.waga));
+    return (plecak.wartosc*1.5 + (L_PLECAKA - plecak.waga));
 }
 
-/** Funkcja wczytuje przedmioty do vectora
+/** \breif Funkcja wczytuje przedmioty z pliku do listy przedmiotow.
+ *
  * Funkcja wczytuje przedmiot z kazdej linijki czyli wczytuje jego:
  *      - nazwe
  *      - wage
  *      - wartosc
  * Nastepnie dodaje przedmiot do wynikowego vectora
+ *
  * @param NAZWA_PLIKU
  * @return vector_przedmiotow
  */
@@ -65,8 +70,10 @@ std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) {
     }
     return przedmioty;
 }
-
-/** Funkcja generuje populacje czyli tworzy losowe poprawne plecaki i zwraca je jako vector plecakow
+/** \brief Funkcja generuje populacje czyli tworzy losowe poprawne plecaki i zwraca je jako vector plecakow.
+ *
+ *  Funkcja kopiuje pule_przedmiotow bo wykorzystuje tasowanie a nie chce wplywac na oryginal
+ *
  * Dzialanie funkcji:
  *      1. Stworzenie listyy wynikowej
  *      2. Stworzenie nowego pustego plecaka
@@ -74,6 +81,7 @@ std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) {
  *      4. Wkladamy do plecaka przedmiotu z puli az jakis sie nie zmiesci
  *      5. Przekazuje gotowy plecak do listy wynikowej
  *      6. jezeli lista < wymagana_liczebnosc_populacji wracam do punktu 2
+ *
  * @param L_OSOBNIKOW
  * @param L_PLECAKA
  * @param pula_przedmiotow
@@ -119,21 +127,18 @@ std::vector < plecak > generator_populacji(const int& L_OSOBNIKOW, const double&
     // 6. jezeli mam wszystkie plecaki zwracam liste - jezeli nie - wracam do punktu 2
     return populacja;
 }
-
-// ======================== GENERACJA POTOMKA ============================
-// Wykorzystuje algortym Order Crossover Operator (OX).
-// wybieram losowy przedzial wewnatrz osobnikow (w odbydwu osobnikach te same indeksy nawet jezeli nie istnieja)
-// przedmioty z tego przedzialu zostaja w swoim potomku (osobnik_a - potomek_a, osobnik_b - potomek_b)
-// pozostale odciete przedmioty wpisujemy do przeciwnego potomka (osobnika_a - potomek_b, osobnik_b - potomek_a) o ile sie zmieszcza
-// jezeli sie nie zmieszcza to nie przekazujemy dalej
-//
-// void krzyzowanie (plecak & osobnik_a, ...);
-
-// std::pair<plecak, plecak> krzyzowanie (const plecak & osobnik_a, const plecak & osobnik_b, const  double L_PLECAKA);
-
-std::pair<int, int> licz_granice_plecaka(plecak *plecak){
+/** \brief Funkcja losuje przedzial wewnatrz plecaka
+ *
+ * Funkcja przyjmuje plecak - liczy jego elementy i losuje przedzial:
+ * czyli losuje lewa i prawa grancie przedzialu
+ * zwraca granice w parze
+ *
+ * @param plecak
+ * @return para(lewa_granica, prawa_granica)
+ */
+std::pair<int, int> licz_granice_plecaka(const plecak& plecak){
     int lewa, prawa;
-    int max_index_a = plecak->przedmioty.size()-1;
+    int max_index_a = plecak.przedmioty.size()-1;
 
     lewa = losowa(0, max_index_a);
     prawa = losowa(0, max_index_a);
@@ -146,42 +151,69 @@ std::pair<int, int> licz_granice_plecaka(plecak *plecak){
 
     return std::make_pair(lewa, prawa);
 }
-
-void przygotowanie_krzyzowania(plecak *rodzic, plecak *potomek, std::vector<przedmiot> *do_przekazania){
+/** \brief Funkcja dzieli przedmioty z plecaka na te do przekazania do potomka_a i potomka_b
+ *
+ * Funkcja losuje przedzial wedlug ktorego dzieli przedmioty na te do przekazania do dwoch potomkow
+ * Te ze srodka przedzialu podaje do swojego potomka a te z zewnatrz przedzialu wpisuje do listy
+ * z ktorej przypiszemy przedmioty do drugiego potomka
+ *
+ * @param rodzic
+ * @param potomek
+ * @param do_przekazania
+ */
+void przygotowanie_krzyzowania(plecak & rodzic, plecak & potomek, std::vector<przedmiot> & do_przekazania){
     std::pair<int, int> granice = licz_granice_plecaka(rodzic);
 
-    for(int i = 0; i <= rodzic->przedmioty.size()-1; i++){
+    for(int i = 0; i <= rodzic.przedmioty.size()-1; i++){
         if( granice.first <= i && i <= granice.second){
-            potomek->przedmioty.push_back( rodzic->przedmioty[i] );
-            potomek->wartosc += rodzic->przedmioty[i].wartosc;
-            potomek->waga += rodzic->przedmioty[i].waga;
+            potomek.przedmioty.push_back( rodzic.przedmioty[i] );
+            potomek.wartosc += rodzic.przedmioty[i].wartosc;
+            potomek.waga += rodzic.przedmioty[i].waga;
         }else{
-            do_przekazania->push_back( rodzic->przedmioty[i] );
+            do_przekazania.push_back( rodzic.przedmioty[i] );
         }
     }
 }
-
-void przypisanie_przedmiotow_potomkom(plecak *potomek_wlasciwy, plecak *potomek_odpad, std::vector<przedmiot> do_wpisania){
+/** \brief Funkcja wpisuje do potomkow przedmioty z list do wpisania
+ *
+ * Funkcja wpisuje do potomkow przedmioty z list utworzonych z rodzicow
+ * Jezeli jakais przedmiot z listy nie zmiesci sie do wlasciwego potomka
+ * przekazujemy go do drugiego potomka
+ *
+ * @param potomek_wlasciwy
+ * @param potomek_odpad
+ * @param do_wpisania
+ */
+void przypisanie_przedmiotow_potomkom(plecak & potomek_wlasciwy, plecak & potomek_odpad, std::vector<przedmiot> & do_wpisania){
     for(int i = 0; i < do_wpisania.size(); i++){
         bool powtarza_sie = false;
-        for(int j = 0; j < potomek_wlasciwy->przedmioty.size(); j++){
-            if(potomek_wlasciwy->przedmioty[j].nazwa == do_wpisania[i].nazwa){
+        for(int j = 0; j < potomek_wlasciwy.przedmioty.size(); j++){
+            if(potomek_wlasciwy.przedmioty[j].nazwa == do_wpisania[i].nazwa){
                 powtarza_sie = true;
             }
         }
         if(powtarza_sie){
-            potomek_odpad->przedmioty.push_back(do_wpisania[i]);
-            potomek_odpad->wartosc += do_wpisania[i].wartosc;
-            potomek_odpad->waga += do_wpisania[i].waga;
+            potomek_odpad.przedmioty.push_back(do_wpisania[i]);
+            potomek_odpad.wartosc += do_wpisania[i].wartosc;
+            potomek_odpad.waga += do_wpisania[i].waga;
         }else{
-            potomek_wlasciwy->przedmioty.push_back(do_wpisania[i]);
-            potomek_wlasciwy->wartosc += do_wpisania[i].wartosc;
-            potomek_wlasciwy->waga += do_wpisania[i].waga;
+            potomek_wlasciwy.przedmioty.push_back(do_wpisania[i]);
+            potomek_wlasciwy.wartosc += do_wpisania[i].wartosc;
+            potomek_wlasciwy.waga += do_wpisania[i].waga;
         }
     }
 }
-
-void krzyzowanie(plecak* osobnik_a, plecak* osobnik_b, std::vector<plecak>* potomkowie, double L_PLECAKA) { //krzyzowanie osobnikow
+/** \brief Funkcja sterujaca calym procesem krzyzowania
+ *
+ * Funkcja przyjmuje dwa plecaki i krzyzuje je zwracajac dwa potomki
+ * Funkjca tworzy listy wykorzystywane w kolejnych funkjcach
+ *
+ * @param osobnik_a
+ * @param osobnik_b
+ * @param potomkowie
+ * @param L_PLECAKA
+ */
+void krzyzowanie(plecak & osobnik_a, plecak & osobnik_b, std::vector<plecak> & potomkowie,const double & L_PLECAKA) { //krzyzowanie osobnikow
     std::vector< przedmiot > do_wpisania_a;
     std::vector< przedmiot > do_wpisania_b;
 
@@ -194,17 +226,17 @@ void krzyzowanie(plecak* osobnik_a, plecak* osobnik_b, std::vector<plecak>* poto
     potomek_b.waga = 0;
     potomek_b.ocena = 0;
 
-    przygotowanie_krzyzowania(osobnik_a, &potomek_a, &do_wpisania_b);
-    przygotowanie_krzyzowania(osobnik_b, &potomek_b, &do_wpisania_a);
+    przygotowanie_krzyzowania(osobnik_a, potomek_a, do_wpisania_b);
+    przygotowanie_krzyzowania(osobnik_b, potomek_b, do_wpisania_a);
 
-    przypisanie_przedmiotow_potomkom(&potomek_a, &potomek_b, do_wpisania_a);
-    przypisanie_przedmiotow_potomkom(&potomek_b, &potomek_a, do_wpisania_b);
+    przypisanie_przedmiotow_potomkom(potomek_a, potomek_b, do_wpisania_a);
+    przypisanie_przedmiotow_potomkom(potomek_b, potomek_a, do_wpisania_b);
 
     potomek_a.ocena = ocen_plecak(potomek_a, L_PLECAKA);
     potomek_b.ocena = ocen_plecak(potomek_b, L_PLECAKA);
 
-    potomkowie->push_back(potomek_b);
-    potomkowie->push_back(potomek_a);
+    potomkowie.push_back(potomek_b);
+    potomkowie.push_back(potomek_a);
 }
 
 // ======================= KRZYZOWANIE POPULACJI ==========================
@@ -215,14 +247,23 @@ void krzyzowanie(plecak* osobnik_a, plecak* osobnik_b, std::vector<plecak>* poto
 // nastepnie potomkow dodajemy do listy potomkowie
 // na koncu zwracamy liste potomkowie
 //
-std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > populacja, int L_PLECAKA) 
+
+/** \brief Funkcja decyduje ktory plecak nalezy skrzyzowac z ktorym
+ *
+ * Funkcja losuje dwa plecaki i krzyzuje je ze soba wedlug oceny
+ *
+ * @param populacja
+ * @param L_PLECAKA
+ * @return
+ */
+std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > & populacja, const int & L_PLECAKA)
 {
     std::vector<plecak> potomkowie;
 
     for (int i = 0; i < populacja.size(); i++) 
     {
         int index = losowa(0, populacja.size() - 1);
-        krzyzowanie(&populacja[i], &populacja[index], &potomkowie, L_PLECAKA);
+        krzyzowanie(populacja[i], populacja[index], potomkowie, L_PLECAKA);
     }
     return potomkowie;
 }
