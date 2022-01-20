@@ -238,23 +238,14 @@ void krzyzowanie(plecak & osobnik_a, plecak & osobnik_b, std::vector<plecak> & p
     potomkowie.push_back(potomek_b);
     potomkowie.push_back(potomek_a);
 }
-
-// ======================= KRZYZOWANIE POPULACJI ==========================
-// krzyzujemy rodzicow miedzy soba w taki sposob zeby otrzymac wiecej dzieci niz rodzicow (niz max liczba osobnikow)
-// po to by nastepnie w selekcji populacji odrzucic najslabszych potomkow
-//
-// po kolei kazdego rodzica krzyzuje z losowym osobnikami - dzieki temu uzyskamy dwa razy wiecej dzieci niz rodzicow
-// nastepnie potomkow dodajemy do listy potomkowie
-// na koncu zwracamy liste potomkowie
-//
-
 /** \brief Funkcja decyduje ktory plecak nalezy skrzyzowac z ktorym
  *
  * Funkcja losuje dwa plecaki i krzyzuje je ze soba wedlug oceny
+ * Dodaje te plecaki do vector_potomkow ktory zwraca
  *
  * @param populacja
  * @param L_PLECAKA
- * @return
+ * @return vector_potomkow
  */
 std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > & populacja, const int & L_PLECAKA)
 {
@@ -267,17 +258,27 @@ std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > & populacja, con
     }
     return potomkowie;
 }
-
-// Funkcja porownojaca plecaki
-bool porownanie_plecakow(plecak plecak1, plecak plecak2) {
+/** \brief Funkcja oceniajaca plecaki wedlug oceny
+ *
+ * @param plecak1
+ * @param plecak2
+ * @return 1/0: 1- leway plceak, 0- prawy plecak
+ */
+bool porownanie_plecakow(const plecak & plecak1, const plecak & plecak2) {
     return(plecak1.ocena > plecak2.ocena);
 }
-
-// ======================== SELEKCJA POPULACJI =========================
-// 1. losujemy dwa osobniki
-// 2. do populacji potomnej przechodzi lepszy z nich.
-// 3. powtarzamy, az populacja potomna bedzie miala odpowiednia wielkosc
-std::vector<plecak> selekcja_populacji_poprawna(std::vector< plecak > populacja, int L_OSOBNIKOW) {
+/**\brief Funkcja dokonuje selekcji turniejowej populacji
+ *
+ * Działanie funkcji:
+ *      1. losujemy dwa osobniki
+ *      2. do populacji potomnej przechodzi lepszy z nich.
+ *      3. powtarzamy, az populacja potomna bedzie miala odpowiednia wielkosc
+ *
+ * @param populacja
+ * @param L_OSOBNIKOW
+ * @return populacja_pootmna
+ */
+std::vector<plecak> selekcja_populacji(std::vector< plecak > & populacja, const int & L_OSOBNIKOW) {
     // tworzenie obiektu wynikowego
     std::vector<plecak> populacja_potomna;
 
@@ -295,22 +296,26 @@ std::vector<plecak> selekcja_populacji_poprawna(std::vector< plecak > populacja,
     //     zwrot obiektu wynikowego
     return populacja_potomna;
 }
-
-// ===================== DRUKUJ PLECAK =============
-// tutaj po prostu drukujemy jeden plecak
-//
-//void drukuj_plecak(std::ofstream & plik, const plecak & plecak_dobry);
-
-void drukuj_plecak(std::ofstream* plik, int numer_generacji, plecak plecak_dobry) {
-    if ((*plik).is_open()) {
-        *plik << "generacja " << numer_generacji << ", waga " << plecak_dobry.waga << ", wartosc" << " " << plecak_dobry.wartosc << ", ocena "<< plecak_dobry.ocena << ":" << std::endl;
+/** \brief Funkcja drukujaca plecak
+ *
+ * @param plik
+ * @param numer_generacji
+ * @param plecak_dobry
+ */
+void drukuj_plecak(std::ofstream & plik, const int & numer_generacji, plecak & plecak_dobry) {
+    if ((plik).is_open()) {
+        plik << "generacja " << numer_generacji << ", waga " << plecak_dobry.waga << ", wartosc" << " " << plecak_dobry.wartosc << ", ocena "<< plecak_dobry.ocena << ":" << std::endl;
         for (int index = 0; index < plecak_dobry.przedmioty.size(); index++) {
-            *plik << "\t\t" << plecak_dobry.przedmioty[index].nazwa << " " << plecak_dobry.przedmioty[index].waga << " " << plecak_dobry.przedmioty[index].wartosc << std::endl;
+            plik << "\t\t" << plecak_dobry.przedmioty[index].nazwa << " " << plecak_dobry.przedmioty[index].waga << " " << plecak_dobry.przedmioty[index].wartosc << std::endl;
         }
     }
 }
 
-// Funkcja wybiera najlepszy element sposrod
+/** \brief Funkcja szuka najlepszego osobnika w populacji wedlug oceny
+ *
+ * @param populacja
+ * @return najlepszy_plecak
+ */
 plecak najlepszy( std::vector<plecak> populacja ){
     plecak najlepszy;
     najlepszy.wartosc = 0;
@@ -322,25 +327,24 @@ plecak najlepszy( std::vector<plecak> populacja ){
     }
     return najlepszy;
 }
-
-// ===================== FUNKCJA ROZRUCHOWA ALGORYTMU ===================
-// to wlasnie ta funkcja wykona cala reszte funkcji w odpowiedniej kolejnosci
-// w niej tez determinujemy liczbe generacji
-//
-// dzieki dobrym nazwom funkcji dalsze komentowanie algorytmu nie ma sensu
-//
-// zwracamy najlepszego osobnika
-//
-plecak algorytm(std::vector<przedmiot> tablica, int L_OSOBNIKOW, double L_PLECAKA, int L_POKOLEN, std::string NAZWA_PLIKU_WYJSCIOWEGO)
+/**\brief Funkcja rozruchowa algorytmu
+ *
+ * @param pula_przedmiotow
+ * @param L_OSOBNIKOW
+ * @param L_PLECAKA
+ * @param L_POKOLEN
+ * @param NAZWA_PLIKU_WYJSCIOWEGO
+ * @return najlepszy_plecak
+ */
+plecak algorytm(std::vector<przedmiot> & pula_przedmiotow, const int & L_OSOBNIKOW,const double & L_PLECAKA, const int & L_POKOLEN, const std::string & NAZWA_PLIKU_WYJSCIOWEGO)
 {
-    // KS: Tablica: czy musi kopia?
-    // KS: NAZWA_PLIKU_WYJSCIOWEGO: czy musi byc kopia?
-    
     std::vector<plecak> populacja;
     std::ofstream plik;
     plik.open(NAZWA_PLIKU_WYJSCIOWEGO);
-
-    populacja = generator_populacji(L_OSOBNIKOW, L_PLECAKA, tablica);
+    struct plecak najlepsiejszy;
+    populacja = generator_populacji(L_OSOBNIKOW, L_PLECAKA, pula_przedmiotow);
+    najlepsiejszy.wartosc = 0;
+    najlepsiejszy.ocena = 0;
     int numer_populacji = 0;
 
     // zabezpieczenie przed nieskonczona petla
@@ -351,15 +355,16 @@ plecak algorytm(std::vector<przedmiot> tablica, int L_OSOBNIKOW, double L_PLECAK
         return plecak;
     }
     else if (populacja.size() < 2) {
-        drukuj_plecak(&plik, numer_populacji, najlepszy(populacja));
+        najlepsiejszy = najlepszy(populacja);
+        drukuj_plecak(plik, numer_populacji, najlepsiejszy);
+        std::cout << "\nnajlepszy plecak:\twaga - " << populacja[0].waga << "\twartosc - " << populacja[0].wartosc << std::endl;
+        std::cout << "\nBlad danych wejsciowych";
         return populacja[0];
     }
-    std::cout << "\nlicze generacje: " << numer_populacji << " LICZB elementow: " << populacja.size() << std::endl;
-    drukuj_plecak(&plik, numer_populacji, najlepszy(populacja));
 
-    struct plecak najlepsiejszy;
-    najlepsiejszy.wartosc = 0;
-    najlepsiejszy.ocena = 0;
+    std::cout << "\nlicze generacje: " << numer_populacji << " LICZB elementow: " << populacja.size() << std::endl;
+    najlepsiejszy = najlepszy(populacja);
+    drukuj_plecak(plik, numer_populacji, najlepsiejszy);
 
     for (int i = 0; i < L_POKOLEN; i++)
     {
@@ -367,19 +372,21 @@ plecak algorytm(std::vector<przedmiot> tablica, int L_OSOBNIKOW, double L_PLECAK
         std::vector<plecak> nowa_populacja;
         plecak debesciak;
         nowa_populacja = krzyzowanie_populacji(populacja, L_PLECAKA);
-        nowa_populacja = selekcja_populacji_poprawna(nowa_populacja, L_OSOBNIKOW);
+        nowa_populacja = selekcja_populacji(nowa_populacja, L_OSOBNIKOW);
         debesciak = najlepszy(nowa_populacja);
         numer_populacji++;
         populacja = nowa_populacja;
-        drukuj_plecak(&plik, numer_populacji, debesciak);
+        drukuj_plecak(plik, numer_populacji, debesciak);
         if (debesciak.ocena > najlepsiejszy.ocena) {
             najlepsiejszy = debesciak;
         }
     }
+
     std::cout << "\nnajlepszy plecak:\twaga - " << najlepsiejszy.waga << "\twartosc - " << najlepsiejszy.wartosc << std::endl;
     for (int i = 0; i < najlepsiejszy.przedmioty.size(); i++) {
         std::cout << najlepsiejszy.przedmioty[i].nazwa << "\t" << najlepsiejszy.przedmioty[i].waga << "\t" << najlepsiejszy.przedmioty[i].wartosc << std::endl;
     }
+
     plik.close();
     return najlepsiejszy;
 }
