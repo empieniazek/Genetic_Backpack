@@ -18,6 +18,6 @@ struct plecak {
 };
 
 /** Funkcja sczytuje przedmioty z pliku. */
-std::vector<przedmiot> wczytaj_przedmioty(const std::string & NAZWA_PLIKU);
+std::vector<przedmiot> wczytaj_przedmioty(const std::string & NAZWA_PLIKU, int L_PLECAKA);
 
-struct plecak algorytm(std::vector<przedmiot> tablica, int L_OSOBNIKOW, double L_PLECAKA, int L_POKOLEN, std::string NAZWA_PLIKU_WYJSCIOWEGO);
+struct plecak algorytm(std::vector<przedmiot> tablica, int L_OSOBNIKOW, double L_PLECAKA, int L_POKOLEN, const std::string& NAZWA_PLIKU_WYJSCIOWEGO);

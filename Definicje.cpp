@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "Deklaracje.h"
 
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja losujaca.
  *
  *  funkcja przyjmuje przedzial z ktorego ma wylosowac liczbe i zwrocic ta liczbe
@@ -23,6 +24,7 @@ int losowa(int minimum, int maximum) {
     std::uniform_int_distribution<int> s(minimum, maximum);
     return s(silnik);
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja ocenia plecak.
  *
  * Funkcja ocenia plecak w zaleznosci od jego wartosci i tego jak jest wypelniony
@@ -38,6 +40,32 @@ double ocen_plecak(const plecak& plecak, const double& L_PLECAKA){
     return (plecak.wartosc*1.5 + (L_PLECAKA - plecak.waga));
 }
 
+void mutacja_osobnika(plecak & osobnik, const std::vector<przedmiot> & pula_przedmiotow, const double L_PLECAKA){
+    int index = losowa(0, (int)pula_przedmiotow.size());
+    przedmiot przedmiot = pula_przedmiotow[index];
+
+    bool powtorzenie_przedmiotu = false;
+    for(auto & przedmiot_plecaka : osobnik.przedmioty){
+        if(przedmiot_plecaka.nazwa == przedmiot.nazwa){
+            return;
+        }
+    }
+    osobnik.przedmioty.push_back(przedmiot);
+    osobnik.wartosc += przedmiot.wartosc;
+    osobnik.waga += przedmiot.waga;
+    osobnik.ocena = ocen_plecak(osobnik, L_PLECAKA);
+}
+
+void mutacja_populacji(std::vector<plecak> & populacja, const std::vector<przedmiot> & pula_przedmiotow, const double L_PLECAKA){
+    int liczba_mutowanych = (int) (populacja.size());
+
+    for(int i = 0; i < liczba_mutowanych; i++){
+        int losowy_osobnik = losowa(0, (int) populacja.size()-1);
+        mutacja_osobnika(populacja[losowy_osobnik], pula_przedmiotow, L_PLECAKA);
+    }
+}
+
+//*******************************************************************************************************************************************************************
 /** \breif Funkcja wczytuje przedmioty z pliku do listy przedmiotow.
  *
  * Funkcja wczytuje przedmiot z kazdej linijki czyli wczytuje jego:
@@ -49,7 +77,7 @@ double ocen_plecak(const plecak& plecak, const double& L_PLECAKA){
  * @param NAZWA_PLIKU
  * @return vector_przedmiotow
  */
-std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) {
+std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU, int L_PLECAKA) {
     std::vector<przedmiot> przedmioty;
     std::ifstream plik(NAZWA_PLIKU);  /// @todo jakas zgrabniejsza nazwa strumienia
     std::string linia;
@@ -62,7 +90,7 @@ std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) {
             n << linia;
             if (n >> item.nazwa >> item.waga >> item.wartosc) 
             {
-                if (item.waga > 0 && item.wartosc > 0)
+                if (item.waga > 0 && item.wartosc > 0 && item.waga <= L_PLECAKA)
                     przedmioty.push_back(item);
             }
             n.clear();  // KS: kasuje flagi bledow 
@@ -70,6 +98,7 @@ std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) {
     }
     return przedmioty;
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja generuje populacje czyli tworzy losowe poprawne plecaki i zwraca je jako vector plecakow.
  *
  *  Funkcja kopiuje pule_przedmiotow bo wykorzystuje tasowanie a nie chce wplywac na oryginal
@@ -126,6 +155,7 @@ std::vector < plecak > generator_populacji(const int& L_OSOBNIKOW, const double&
     // 6. jezeli mam wszystkie plecaki zwracam liste - jezeli nie - wracam do punktu 2
     return populacja;
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja losuje przedzial wewnatrz plecaka
  *
  * Funkcja przyjmuje plecak - liczy jego elementy i losuje przedzial:
@@ -137,7 +167,7 @@ std::vector < plecak > generator_populacji(const int& L_OSOBNIKOW, const double&
  */
 std::pair<int, int> licz_granice_plecaka(const plecak& plecak){
     int lewa, prawa;
-    int max_index_a = plecak.przedmioty.size()-1;
+    int max_index_a = (int) plecak.przedmioty.size()-1;
 
     lewa = losowa(0, max_index_a);
     prawa = losowa(0, max_index_a);
@@ -150,6 +180,7 @@ std::pair<int, int> licz_granice_plecaka(const plecak& plecak){
 
     return std::make_pair(lewa, prawa);
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja dzieli przedmioty z plecaka na te do przekazania do potomka_a i potomka_b
  *
  * Funkcja losuje przedzial wedlug ktorego dzieli przedmioty na te do przekazania do dwoch potomkow
@@ -173,6 +204,7 @@ void przygotowanie_krzyzowania(plecak & rodzic, plecak & potomek, std::vector<pr
         }
     }
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja wpisuje do potomkow przedmioty z list do wpisania
  *
  * Funkcja wpisuje do potomkow przedmioty z list utworzonych z rodzicow
@@ -184,24 +216,25 @@ void przygotowanie_krzyzowania(plecak & rodzic, plecak & potomek, std::vector<pr
  * @param do_wpisania
  */
 void przypisanie_przedmiotow_potomkom(plecak & potomek_wlasciwy, plecak & potomek_odpad, std::vector<przedmiot> & do_wpisania){
-    for(int i = 0; i < do_wpisania.size(); i++){
+    for(auto & przedmiot : do_wpisania){
         bool powtarza_sie = false;
-        for(int j = 0; j < potomek_wlasciwy.przedmioty.size(); j++){
-            if(potomek_wlasciwy.przedmioty[j].nazwa == do_wpisania[i].nazwa){
+        for(auto & przedmiot_potomka : potomek_wlasciwy.przedmioty){
+            if(przedmiot_potomka.nazwa == przedmiot.nazwa){
                 powtarza_sie = true;
             }
         }
         if(powtarza_sie){
-            potomek_odpad.przedmioty.push_back(do_wpisania[i]);
-            potomek_odpad.wartosc += do_wpisania[i].wartosc;
-            potomek_odpad.waga += do_wpisania[i].waga;
+            potomek_odpad.przedmioty.push_back(przedmiot);
+            potomek_odpad.wartosc += przedmiot.wartosc;
+            potomek_odpad.waga += przedmiot.waga;
         }else{
-            potomek_wlasciwy.przedmioty.push_back(do_wpisania[i]);
-            potomek_wlasciwy.wartosc += do_wpisania[i].wartosc;
-            potomek_wlasciwy.waga += do_wpisania[i].waga;
+            potomek_wlasciwy.przedmioty.push_back(przedmiot);
+            potomek_wlasciwy.wartosc += przedmiot.wartosc;
+            potomek_wlasciwy.waga += przedmiot.waga;
         }
     }
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja sterujaca calym procesem krzyzowania
  *
  * Funkcja przyjmuje dwa plecaki i krzyzuje je zwracajac dwa potomki
@@ -237,6 +270,7 @@ void krzyzowanie(plecak & osobnik_a, plecak & osobnik_b, std::vector<plecak> & p
     potomkowie.push_back(potomek_b);
     potomkowie.push_back(potomek_a);
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja decyduje ktory plecak nalezy skrzyzowac z ktorym
  *
  * Funkcja losuje dwa plecaki i krzyzuje je ze soba wedlug oceny
@@ -252,11 +286,12 @@ std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > & populacja, con
 
     for (int i = 0; i < populacja.size(); i++) 
     {
-        int index = losowa(0, populacja.size() - 1);
+        int index = losowa(0, (int) populacja.size() - 1);
         krzyzowanie(populacja[i], populacja[index], potomkowie, L_PLECAKA);
     }
     return potomkowie;
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja oceniajaca plecaki wedlug oceny
  *
  * @param plecak1
@@ -266,6 +301,7 @@ std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > & populacja, con
 bool porownanie_plecakow(const plecak & plecak1, const plecak & plecak2) {
     return(plecak1.ocena > plecak2.ocena);
 }
+//*******************************************************************************************************************************************************************
 /**\brief Funkcja dokonuje selekcji turniejowej populacji
  *
  * Działanie funkcji:
@@ -282,8 +318,8 @@ std::vector<plecak> selekcja_populacji(std::vector< plecak > & populacja, const 
     std::vector<plecak> populacja_potomna;
 
     while (populacja_potomna.size() < L_OSOBNIKOW) {
-        int index1 = losowa(0, populacja.size() - 1);
-        int index2 = losowa(0, populacja.size() - 1);
+        int index1 = losowa(0, (int) populacja.size() - 1);
+        int index2 = losowa(0, (int) populacja.size() - 1);
 
         if (porownanie_plecakow(populacja[index1], populacja[index2])) {
             populacja_potomna.push_back(populacja[index1]);
@@ -295,6 +331,7 @@ std::vector<plecak> selekcja_populacji(std::vector< plecak > & populacja, const 
     //     zwrot obiektu wynikowego
     return populacja_potomna;
 }
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja drukujaca plecak
  *
  * @param plik
@@ -304,12 +341,12 @@ std::vector<plecak> selekcja_populacji(std::vector< plecak > & populacja, const 
 void drukuj_plecak(std::ofstream & plik, const int & numer_generacji, plecak & plecak_dobry) {
     if ((plik).is_open()) {
         plik << "generacja " << numer_generacji << ", waga " << plecak_dobry.waga << ", wartosc" << " " << plecak_dobry.wartosc << ", ocena "<< plecak_dobry.ocena << ":" << std::endl;
-        for (int index = 0; index < plecak_dobry.przedmioty.size(); index++) {
-            plik << "\t\t" << plecak_dobry.przedmioty[index].nazwa << " " << plecak_dobry.przedmioty[index].waga << " " << plecak_dobry.przedmioty[index].wartosc << std::endl;
-        }
+//        for (auto & przedmiot : plecak_dobry.przedmioty) {
+//            plik << "\t\t" << przedmiot.nazwa << " " << przedmiot.waga << " " << przedmiot.wartosc << std::endl;
+//        }
     }
 }
-
+//*******************************************************************************************************************************************************************
 /** \brief Funkcja szuka najlepszego osobnika w populacji wedlug oceny
  *
  * @param populacja
@@ -319,13 +356,14 @@ plecak najlepszy( std::vector<plecak> & populacja ){
     plecak najlepszy;
     najlepszy.wartosc = 0;
     najlepszy.ocena = 0;
-    for(int i = 0; i < populacja.size(); i++){
-        if(porownanie_plecakow(populacja[i], najlepszy)){
-            najlepszy = populacja[i];
+    for(auto & osobnik : populacja){
+        if(porownanie_plecakow(osobnik, najlepszy)){
+            najlepszy = osobnik;
         }
     }
     return najlepszy;
 }
+//*******************************************************************************************************************************************************************
 /**\brief Funkcja rozruchowa algorytmu
  *
  * @param pula_przedmiotow
@@ -335,7 +373,7 @@ plecak najlepszy( std::vector<plecak> & populacja ){
  * @param NAZWA_PLIKU_WYJSCIOWEGO
  * @return najlepszy_plecak
  */
-plecak algorytm(std::vector<przedmiot> & pula_przedmiotow, const int & L_OSOBNIKOW, const double & L_PLECAKA, const int & L_POKOLEN, const std::string & NAZWA_PLIKU_WYJSCIOWEGO)
+plecak algorytm(std::vector<przedmiot> pula_przedmiotow, const int L_OSOBNIKOW, const double L_PLECAKA, const int L_POKOLEN, const std::string& NAZWA_PLIKU_WYJSCIOWEGO)
 {
     std::vector<plecak> populacja;
     std::ofstream plik;
@@ -370,6 +408,7 @@ plecak algorytm(std::vector<przedmiot> & pula_przedmiotow, const int & L_OSOBNIK
         std::cout << "\nlicze generacje: " << numer_populacji+1 << " LICZB elementow: " << populacja.size() << std::endl;
         std::vector<plecak> nowa_populacja;
         plecak debesciak;
+        mutacja_populacji(populacja, pula_przedmiotow, L_PLECAKA);
         nowa_populacja = krzyzowanie_populacji(populacja, L_PLECAKA);
         nowa_populacja = selekcja_populacji(nowa_populacja, L_OSOBNIKOW);
         debesciak = najlepszy(nowa_populacja);
@@ -383,8 +422,8 @@ plecak algorytm(std::vector<przedmiot> & pula_przedmiotow, const int & L_OSOBNIK
     }
 
     std::cout << "\nnajlepszy plecak:\twaga - " << najlepsiejszy.waga << "\twartosc - " << najlepsiejszy.wartosc << std::endl;
-    for (int i = 0; i < najlepsiejszy.przedmioty.size(); i++) {
-        std::cout << najlepsiejszy.przedmioty[i].nazwa << "\t" << najlepsiejszy.przedmioty[i].waga << "\t" << najlepsiejszy.przedmioty[i].wartosc << std::endl;
+    for (auto & przedmiot : najlepsiejszy.przedmioty) {
+        std::cout << przedmiot.nazwa << "\t" << przedmiot.waga << "\t" << przedmiot.wartosc << std::endl;
     }
 
     plik.close();

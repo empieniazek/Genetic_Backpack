@@ -70,7 +70,7 @@ int main(int argc, char** argv) { //zrobic zeby main wczytywal parametry wywolan
         return 0;
     }
 
-    algorytm(wczytaj_przedmioty(nazwa_pliku_wejsciowego), L_OSOBNIKOW, L_PLECAKA, L_POKOLEN, NAZWA_PLIKU_WYJSCIOWEGO);
+    algorytm(wczytaj_przedmioty(nazwa_pliku_wejsciowego, L_PLECAKA), L_OSOBNIKOW, L_PLECAKA, L_POKOLEN, NAZWA_PLIKU_WYJSCIOWEGO);
     
     // KS: Co zwraca main?
 }
