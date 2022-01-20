@@ -7,8 +7,13 @@
 #include <algorithm>
 #include "Deklaracje.h"
 
-// ====================== generator liczb losowych ==================
-// funkcja ktora zwraca nam losowa liczbe z podanego przedzialu
+/** Funkcja losujaca
+ *  funkcja przyjmuje przedzial z ktorego ma wylosowac liczbe
+ *  zwraca liczbe
+ * @param minimum
+ * @param maximum
+ * @return losowa_liczba
+ */
 int losowa(int minimum, int maximum) {
     if (minimum > maximum) {
         return 0;
@@ -17,25 +22,37 @@ int losowa(int minimum, int maximum) {
     std::uniform_int_distribution<int> s(minimum, maximum);
     return s(silnik);
 }
-
-double ocen_plecak(const plecak& plecak, const double L_PLECAKA){
+/** Funkcja ocenia plecak
+ * Funkcja ocenia plecak w zaleznosci od jego wartosci i tego jak jest wypelniony
+ * @param plecak
+ * @param L_PLECAKA
+ * @return ocena
+ */
+double ocen_plecak(const plecak& plecak, const double& L_PLECAKA){
     if(plecak.waga > L_PLECAKA){
         return 0;
     }
     return (plecak.wartosc*1.5 - (L_PLECAKA - plecak.waga));
 }
 
-// ======================== tworzenie puli przedmiotow =====================
-// funkcja przedmioty tworzy pule przedmiotow
+/** Funkcja wczytuje przedmioty do vectora
+ * Funkcja wczytuje przedmiot z kazdej linijki czyli wczytuje jego:
+ *      - nazwe
+ *      - wage
+ *      - wartosc
+ * Nastepnie dodaje przedmiot do wynikowego vectora
+ * @param NAZWA_PLIKU
+ * @return vector_przedmiotow
+ */
 std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) {
     std::vector<przedmiot> przedmioty;
     std::ifstream plik(NAZWA_PLIKU);  /// @todo jakas zgrabniejsza nazwa strumienia
-    przedmiot item;
     std::string linia;
     while (plik)
     {
         while (getline(plik, linia)) 
         {
+            przedmiot item;
             std::stringstream n;
             n << linia;
             if (n >> item.nazwa >> item.waga >> item.wartosc) 
@@ -49,18 +66,20 @@ std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU) {
     return przedmioty;
 }
 
-// ================ GENERACJA POPULACJI PLECAKOW ================
-// 
-// Funkcja generator_pupulacji tworzy liste plecakow (struct plecak)
-// 
-// 1. tworzeliste plecakow
-// 2. tworze plecak
-// 3. generuje losowa permutacje przedmiotow
-// 4. iteruje od gory po przedmiotach i wkladam do plecaka az skonczy sie w nim miejsce
-// 5. przekazuje plecak do listy plecakow
-// 6. jezeli mam wszystkie plecaki zwracam liste - jezeli nie - wracam do punktu 2
-
-std::vector < plecak > generator_populacji(int L_OSOBNIKOW, double L_PLECAKA, std::vector<przedmiot> tablica) {
+/** Funkcja generuje populacje czyli tworzy losowe poprawne plecaki i zwraca je jako vector plecakow
+ * Dzialanie funkcji:
+ *      1. Stworzenie listyy wynikowej
+ *      2. Stworzenie nowego pustego plecaka
+ *      3. Przetasowanie puli przedmitow - ze wzgledu na ten punkt funkcja tworzy kopie puli
+ *      4. Wkladamy do plecaka przedmiotu z puli az jakis sie nie zmiesci
+ *      5. Przekazuje gotowy plecak do listy wynikowej
+ *      6. jezeli lista < wymagana_liczebnosc_populacji wracam do punktu 2
+ * @param L_OSOBNIKOW
+ * @param L_PLECAKA
+ * @param pula_przedmiotow
+ * @return vector_plecakow
+ */
+std::vector < plecak > generator_populacji(const int& L_OSOBNIKOW, const double& L_PLECAKA, std::vector<przedmiot> pula_przedmiotow) {
     // 1. Tworze liste placakow
     std::vector < plecak > populacja;
     static std::default_random_engine silnik(std::chrono::system_clock::now().time_since_epoch().count());
@@ -74,23 +93,23 @@ std::vector < plecak > generator_populacji(int L_OSOBNIKOW, double L_PLECAKA, st
         plecak.przedmioty;
         // 3. losuje permutacje zbioru przedmiotow
 
-        std::shuffle(std::begin(tablica), std::end(tablica), silnik);
+        std::shuffle(std::begin(pula_przedmiotow), std::end(pula_przedmiotow), silnik);
 
         int index_przedmiotu = 0; // zmienna potrzebna do petli
 
         // 4. iteruje od gory po przedmiotach i wkladam do plecaka az skonczy sie w nim miejsce
 
-        while ((L_PLECAKA - plecak.waga) >= tablica[index_przedmiotu].waga) {
+        while ((L_PLECAKA - plecak.waga) >= pula_przedmiotow[index_przedmiotu].waga) {
 
             // wkladam przedmiot do plecaka i doliczam jego statystyki
-            plecak.przedmioty.push_back(tablica[index_przedmiotu]);
-            plecak.waga += tablica[index_przedmiotu].waga;
-            plecak.wartosc += tablica[index_przedmiotu].wartosc;
+            plecak.przedmioty.push_back(pula_przedmiotow[index_przedmiotu]);
+            plecak.waga += pula_przedmiotow[index_przedmiotu].waga;
+            plecak.wartosc += pula_przedmiotow[index_przedmiotu].wartosc;
 
             // zmieniam index dla kolejnego przedmiotu
             index_przedmiotu++;
             // jezeli skoncza nam sie przedmioty konczymy wkladanie do plecaka
-            if (index_przedmiotu > tablica.size() - 1) break;
+            if (index_przedmiotu > pula_przedmiotow.size() - 1) break;
         }
 
         //5. przekazuje plecak do listy plecakow
