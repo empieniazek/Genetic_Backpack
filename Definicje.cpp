@@ -98,7 +98,6 @@ std::vector < plecak > generator_populacji(const int& L_OSOBNIKOW, const double&
         plecak.waga = 0;
         plecak.wartosc = 0;
         plecak.ocena = 0;
-        plecak.przedmioty;
         // 3. losuje permutacje zbioru przedmiotow
 
         std::shuffle(std::begin(pula_przedmiotow), std::end(pula_przedmiotow), silnik);
@@ -247,7 +246,7 @@ void krzyzowanie(plecak & osobnik_a, plecak & osobnik_b, std::vector<plecak> & p
  * @param L_PLECAKA
  * @return vector_potomkow
  */
-std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > & populacja, const int & L_PLECAKA)
+std::vector<plecak> krzyzowanie_populacji(std::vector< plecak > & populacja, const double & L_PLECAKA)
 {
     std::vector<plecak> potomkowie;
 
@@ -336,7 +335,7 @@ plecak najlepszy( std::vector<plecak> & populacja ){
  * @param NAZWA_PLIKU_WYJSCIOWEGO
  * @return najlepszy_plecak
  */
-plecak algorytm(std::vector<przedmiot> & pula_przedmiotow, const int & L_OSOBNIKOW,const double & L_PLECAKA, const int & L_POKOLEN, const std::string & NAZWA_PLIKU_WYJSCIOWEGO)
+plecak algorytm(std::vector<przedmiot> & pula_przedmiotow, const int & L_OSOBNIKOW, const double & L_PLECAKA, const int & L_POKOLEN, const std::string & NAZWA_PLIKU_WYJSCIOWEGO)
 {
     std::vector<plecak> populacja;
     std::ofstream plik;
