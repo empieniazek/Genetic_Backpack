@@ -316,7 +316,7 @@ void drukuj_plecak(std::ofstream & plik, const int & numer_generacji, plecak & p
  * @param populacja
  * @return najlepszy_plecak
  */
-plecak najlepszy( std::vector<plecak> populacja ){
+plecak najlepszy( std::vector<plecak> & populacja ){
     plecak najlepszy;
     najlepszy.wartosc = 0;
     najlepszy.ocena = 0;
@@ -377,6 +377,7 @@ plecak algorytm(std::vector<przedmiot> & pula_przedmiotow, const int & L_OSOBNIK
         numer_populacji++;
         populacja = nowa_populacja;
         drukuj_plecak(plik, numer_populacji, debesciak);
+
         if (debesciak.ocena > najlepsiejszy.ocena) {
             najlepsiejszy = debesciak;
         }
