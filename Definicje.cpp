@@ -79,7 +79,7 @@ void mutacja_populacji(std::vector<plecak> & populacja, const std::vector<przedm
  */
 std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU, int L_PLECAKA) {
     std::vector<przedmiot> przedmioty;
-    std::ifstream plik(NAZWA_PLIKU);  /// @todo jakas zgrabniejsza nazwa strumienia
+    std::ifstream plik(NAZWA_PLIKU);
     std::string linia;
     while (plik)
     {
@@ -93,7 +93,7 @@ std::vector<przedmiot> wczytaj_przedmioty(const std::string& NAZWA_PLIKU, int L_
                 if (item.waga > 0 && item.wartosc > 0 && item.waga <= L_PLECAKA)
                     przedmioty.push_back(item);
             }
-            n.clear();  // KS: kasuje flagi bledow 
+            n.clear();
         }
     }
     return przedmioty;
