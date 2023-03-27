@@ -4,21 +4,14 @@
 
 #include "Deklaracje.h"
 
-// KS: Dla parametrow:
-// -i wejscie -o wyjscie -p 34 -g 12 -n 100
-// program wyswietla komunikat
-// podano niepoprawne parametry
-// Tak ma byc?
 
-int main(int argc, char** argv) { //zrobic zeby main wczytywal parametry wywolania programu
+int main(int argc, char** argv) { 
     std::string tab_komend[5] = { "-i", "-o", "-p", "-g", "-n" };
-    // KS: To wprawdzie tylko konwencja, ale zwykle samymi wielkimi literami oznacza sie stale.
     std::string nazwa_pliku_wejsciowego;
     std::string NAZWA_PLIKU_WYJSCIOWEGO;
     int L_POKOLEN;
     int L_OSOBNIKOW;
     double L_PLECAKA;
-    // KS: Sprawdzenie poprawnosci uruchomienia programu --> funkcji.
     if (argc == 11)
     {
         for (int i = 1; i < argc - 1; i += 2) {
@@ -54,7 +47,7 @@ int main(int argc, char** argv) { //zrobic zeby main wczytywal parametry wywolan
             else 
             {
                 std::cerr << "niepoprawnie podano parametry";
-                return 1; // KS: return 0;
+                return 1;
             }
         }
     }
@@ -72,5 +65,4 @@ int main(int argc, char** argv) { //zrobic zeby main wczytywal parametry wywolan
 
     algorytm(wczytaj_przedmioty(nazwa_pliku_wejsciowego, L_PLECAKA), L_OSOBNIKOW, L_PLECAKA, L_POKOLEN, NAZWA_PLIKU_WYJSCIOWEGO);
     
-    // KS: Co zwraca main?
 }
